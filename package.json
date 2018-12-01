@@ -1,0 +1,13 @@
+{
+  "name": "dungeon-exploder",
+  "version": "1.0.0",
+  "author": "loyaltouch@gmail.com",
+  "description": "gamebook like game for electron",
+  "license": "MIT",
+  "main": "main.js",
+  "build": {
+    "win": {
+      "target": "nsis"
+    }
+  }
+}

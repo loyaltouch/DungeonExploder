@@ -1,0 +1,1 @@
+powershell -NoProfile -ExecutionPolicy Unrestricted %~dp0secne-build.ps1
