@@ -5,7 +5,7 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const ipc = electron.ipcMain;
-const Logic = require('./logic.js');
+const Logic = require('./logic/logic.js');
 const logic = new Logic();
 
 // メインウィンドウはGCされないようにグローバル宣言
@@ -40,6 +40,12 @@ app.on('ready', ()=> {
 
 // ipc.on(channel, listener) の形をとる。channel 名はなんでも良い。
 ipc.on('load', (event, arg) => {
-  const data = load(arg);
-  event.returnValue = JSON.parse(data);
+  try{
+    const data = load(arg);
+    event.returnValue = JSON.parse(data);
+  }catch(err){
+    console.log(err);
+  }finally{
+    event.returnValue = null;
+  }
 });
