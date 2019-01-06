@@ -26,11 +26,13 @@ class Member{
   
   constructor(name, vit, dex, lck){
     this.name = name;
-    this.vit = vit;
+    this.vit_max = vit;
     this.dex = dex;
-    this.lck = lck;
+    this.lck_max = lck;
     this.equip = { type: 1, value: 0, prise: 0, count: 0 };
     this.buff = 0;
+
+    this.inn();
   }
 
   /**
@@ -41,5 +43,15 @@ class Member{
    */
   get_dex(){
     return this.dex + this.equip.value + this.buff;
+  }
+
+  /**
+   * 宿屋に泊まる時の処理。現在の体力と運を原点に設定する
+   * (引数および戻り値なし)
+   * @method inn
+   */
+  inn(){
+    this.vit_now = this.vit_max;
+    this.lck_now = this.lck_max;
   }
 }

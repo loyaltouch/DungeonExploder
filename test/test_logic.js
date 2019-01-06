@@ -9,9 +9,11 @@ describe('Logic', ()=>{
 
   it('you', ()=>{
     assert(logic.you.name == "あなた");
-    assert(logic.you.vit == 12);
+    assert(logic.you.vit_max == 12);
     assert(logic.you.dex == 6);
-    assert(logic.you.lck == 9);
+    assert(logic.you.lck_max == 9);
+    assert(logic.you.vit_now == 12);
+    assert(logic.you.lck_now == 9);
   });
 
   it('get_dex', ()=>{
