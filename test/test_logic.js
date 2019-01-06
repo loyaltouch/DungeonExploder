@@ -15,6 +15,15 @@ describe('Logic', ()=>{
   });
 
   it('get_dex', ()=>{
+    // 素手の場合
     assert(logic.you.get_dex() == 6);
+
+    // ナイフを装備している場合
+    logic.you.equip = logic.items.ナイフ;
+    assert(logic.you.get_dex() == 7);
+
+    // 更に魔法で攻撃力強化した場合
+    logic.you.buff = 2;
+    assert(logic.you.get_dex() == 9);
   });
 });
