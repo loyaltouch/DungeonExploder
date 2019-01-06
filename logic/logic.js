@@ -13,8 +13,14 @@ module.exports = class Logic{
 
 /**
   * 敵や味方のキャラクターを表すクラス
+  * 現在体力点および運点は原体力点・運点でリセットされる
   *
   * @class Member (キャラクター)
+  * @constructor
+  * @param name {String} 名前
+  * @param vit {Int} 原体力点
+  * @param dex {Int} 原技量点
+  * @param lck {Int} 原運点 (主人公以外、初期値は0)
   */
 class Member{
   
