@@ -1,12 +1,31 @@
 'use strict';
 
-module.exports = class Logic{
+const items = require('../items.js');
 
-  log(){
-    console.log("logc class");
+module.exports = class Logic{
+  constructor(){
+    this.you = new Member("あなた", 12, 6, 9);
   }
 
-  add(a, b){
-    return a + b;
+  log(){
+    console.log("logic class");
+  }
+}
+
+class Member{
+  constructor(name, vit, dex, lck){
+    this.name = name;
+    this.vit = vit;
+    this.dex = dex;
+    this.lck = lck;
+    this.equip = items["(なし)"];
+  }
+
+  get_dex(){
+    return this.dex + this.equip.value;
+  }
+
+  equip(item){
+    
   }
 }
