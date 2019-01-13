@@ -22,10 +22,26 @@ describe('Logic', ()=>{
 
     // ナイフを装備している場合
     logic.you.equip = logic.items.ナイフ;
-    assert(logic.you.get_dex() == 7);
+    assert.equal(logic.you.get_dex(), 7);
 
     // 更に魔法で攻撃力強化した場合
     logic.you.buff = 2;
-    assert(logic.you.get_dex() == 9);
+    assert.equal(logic.you.get_dex(), 9);
+  });
+
+  it('dice', ()=>{
+    // 2～12の乱数
+    for(let i = 0; i < 100; i++){
+      const ret = logic.rand();
+      assert(ret >= 2);
+      assert(ret <= 12);
+    }
+  });
+
+  it('buttle', ()=>{
+    let enemy = logic.create_member("ゴブリン", 8, 8, 0);
+    let buttle = logic.create_buttle(enemy);
+    assert.equal(buttle.you.name, "あなた");
+    assert.equal(buttle.enm.name, "ゴブリン");
   });
 });

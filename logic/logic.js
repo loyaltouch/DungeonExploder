@@ -1,13 +1,39 @@
 'use strict';
 
+/**
+ * ゲームのメインロジック
+ *
+ * @class Logic (メインロジック)
+ */
 module.exports = class Logic{
   constructor(){
     this.you = new Member("あなた", 12, 6, 9);
     this.items = require('../items.js');
+    this.scene = new Scene("0_0");
   }
 
   log(){
     console.log("logic class");
+  }
+
+  rand(){
+    return this.randi(6) + this.randi(6);
+  }
+
+  randi(max){
+    return Math.floor(Math.random() * max) + 1;
+  }
+
+  luck_test(roll){
+    return this.you.lck_now-- >= roll;
+  }
+
+  create_member(name, vit, dex, lck){
+    return new Member(name, vit, dex, lck);
+  }
+
+  create_buttle(enemy){
+    return new Buttle(this, enemy);
   }
 }
 
@@ -53,5 +79,103 @@ class Member{
   inn(){
     this.vit_now = this.vit_max;
     this.lck_now = this.lck_max;
+  }
+}
+
+/**
+  * シーン管理をするクラス
+  * 1シーンはゲームブックの1パラグラフに相当する
+  * パラグラフによってはセーブが可能となる
+  *
+  * @class Scene (シーン)
+  * @constructor
+  * @param name {String} 名前
+  */
+class Scene{
+  constructor(name){
+    this.name = name;
+    this.on_enter = null;
+    this.on_exit = null;
+    this.msg = "";
+    this.link = {};
+  }
+}
+
+/**
+  * 戦闘シーンを管理するクラス
+  * 1パラグラフ内で戦闘する場合はこのクラスを利用する
+  * 基本的に、自分が負けるか敵が負けた場合戦闘終了する
+  *
+  * @class Buttle (戦闘シーン特別管理)
+  * @constructor
+  * @param you {Object} プレイヤーのキャラクターオブジェクト
+  * @param enm {Object} 敵のキャラクターオブジェクト
+  */
+class Buttle{
+  constructor(logic, enm){
+    this.logic = logic;
+    this.you = this.logic.you;
+    this.enm = enm;
+    this.empty();
+  }
+
+  main(){
+    if(!this.actor || !this.target){
+      this.init_turn();
+      return;
+    }
+
+    if(this.luck == 0){
+      this.select_luck();
+      return;
+    }
+
+    if(this.you.vit_now <= 0){
+      this.lose();
+    }else if(this.enm.vit_now <= 0){
+      this.win();
+    }
+
+    this.end_turn();
+
+  }
+
+  empty(){
+    this.actor = null;
+    this.target = null;
+    this.actor_damage = 2;
+    this.tareget_damage = 2;
+    this.luck = 0; // 0:運試し未決定 1:運試しする -1:運試ししない
+  }
+
+  init_turn(){
+    const you_dex = this.you + this.logic.rand();
+    const enm_dex = this.enm + this.logic.rand();
+
+    this.logic.scene.msg = `${this.you.name}の攻撃力 : ${you_dex}\n`;
+    this.logic.scene.msg += `${this.enm.name}の攻撃力 : ${enm_dex}\n`;
+
+    if(you_dex >= enm_dex){
+      this.actor = this.you;
+      this.target = this.enm;
+    }else{
+      this.actor = this.enm;
+      this.target = this.you;
+    }
+    this.logic.scene.msg += `${this.actor.name}の攻撃\n`;
+    this.logic.scene.select.push({"≫次へ": "buttle_damage" });
+    this.logic.scene.select.push({"運試し": "buttle_luck" });
+  }
+
+  select_luck(){
+    const you_roll = this.logic.rand();
+    this.logic.scene.msg += `あなたの運 : ${this.you.lck_now}\n`;
+    this.logic.scene.msg += `運試し結果 : ${you_roll}\n`;
+    const luck_test = this.logic.luck_test(you_roll);
+    if(luck_test){
+      this.logic.scene.msg += `運試し成功！\n`;
+    }else{
+      this.logic.scene.msg += `運試し失敗…\n`;
+    }
   }
 }
