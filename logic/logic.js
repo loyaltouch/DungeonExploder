@@ -149,10 +149,14 @@ class Buttle{
   }
 
   init_turn(){
+    this.logic.scene.select.push({
+      "戦う": "buttle_attack",
+      "装備を選ぶ": "equip"
+    });
     const you_dex = this.you + this.logic.rand();
     const enm_dex = this.enm + this.logic.rand();
 
-    this.logic.scene.msg = `${this.you.name}の攻撃力 : ${you_dex}\n`;
+    this.logic.scene.msg += `${this.you.name}の攻撃力 : ${you_dex}\n`;
     this.logic.scene.msg += `${this.enm.name}の攻撃力 : ${enm_dex}\n`;
 
     if(you_dex >= enm_dex){
