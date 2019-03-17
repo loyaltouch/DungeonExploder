@@ -77,6 +77,7 @@ function reflesh_message(message){
 function reflesh(data){
   reflesh_message(data.message);
   reflesh_select(data.select);
+  reflesh_image(data.image);
 }
 
 function load_scene(scene_name) {
@@ -88,6 +89,4 @@ function load_scene(scene_name) {
 }
 
 window.onload = ()=>{
-  //let msg = document.querySelector("#msg");
-  //msg.innerText = "ここの文字列が変わります";
 };

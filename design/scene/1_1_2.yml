@@ -10,12 +10,8 @@ message: |-
   ・消費する体力の残存量
   が必要である。各項目の見出しには、媒介アイテムが書いている
 select:
-- 福袋
-- magic/fukubukuro
-- 鍼
-- magic/hari
-- 仙人の薬壺
-- magic/kusuritubo
-- 火の粉の笛
-- magic/hinokonofue
+  - 福袋: magic/fukubukuro
+  - 鍼: magic/hari
+  - 仙人の薬壺: magic/kusuritubo
+  - 火の粉の笛: magic/hinokonofue
 prev: '1_1'
