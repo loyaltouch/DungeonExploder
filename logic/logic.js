@@ -9,7 +9,7 @@ module.exports = class Logic{
   constructor(){
     this.you = new Member("あなた", 12, 6, 9);
     this.items = require('../items.js');
-    this.scene = new Scene("0_0");
+    this.scene = new Scene("", null);
   }
 
   log(){
@@ -34,6 +34,10 @@ module.exports = class Logic{
 
   create_buttle(enemy){
     return new Buttle(this, enemy);
+  }
+
+  new_scene(name, data){
+    this.scene = new Scene(name, data);
   }
 }
 
@@ -90,14 +94,23 @@ class Member{
   * @class Scene (シーン)
   * @constructor
   * @param name {String} 名前
+  * @param data_str {Object} シーンを管理するJSONテキストデータ
   */
 class Scene{
-  constructor(name){
-    this.name = name;
-    this.on_enter = null;
-    this.on_exit = null;
-    this.msg = "";
-    this.link = {};
+  constructor(name, data_str){
+    try{
+    const data = JSON.parse(data_str);
+      this.name = name;
+      this.on_enter = null;
+      this.on_exit = null;
+      this.message = data.message || "";
+      this.select = data.select || {};
+      data.next && (this.select["≫次へ"] = data.next);
+      data.prev && (this.select["≪戻る"] = data.prev);
+      data.image && (this.image = data.image);
+    }catch(e){
+      console.log(e.message);
+    }
   }
 }
 

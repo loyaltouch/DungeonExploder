@@ -42,7 +42,8 @@ app.on('ready', ()=> {
 ipc.on('load', (event, arg) => {
   try{
     const data = load(arg);
-    event.returnValue = JSON.parse(data);
+    logic.new_scene(arg, data);
+    event.returnValue = logic.scene;
   }catch(err){
     console.log(err);
   }finally{
