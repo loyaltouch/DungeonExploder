@@ -3,3 +3,30 @@
 body {
   font-family: "メイリオ", Sans-Serif;
 }
+
+#canvas {
+  float: left;
+}
+
+#select {
+  clear: both;
+}
+
+.label {
+  background: black;
+  color: white;
+  padding: 1px;
+}
+
+.status {
+  border: solid 3px black;
+  border-radius: 5px;
+  font-size: x-large;
+}
+
+tr.st_name > td {
+  border: double 3px black;
+}
+.enm_status {
+  display: none;
+}

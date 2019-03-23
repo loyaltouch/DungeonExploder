@@ -7,11 +7,63 @@
 	<script src="view.js"></script>
   </head>
   <body>
-	<h1>Let's ダンジョン踏破</h1>
+	<!-- ステータス欄 開始 -->
+	<table>
+		<tr class="st_name">
+			<td colspan="3"><spanid="you_name">あなた</span></td>
+			<td class="enm_status" colspan="2"><span id="enm_name">相手</span></td>
+		</tr>
+		<tr>
+				<td><div class="label">体力</div></td>
+				<td><div class="label">技量</div></td>
+				<td><div class="label">運</div></td>
+				<td class="enm_status"><div class="label">体力</div></td>
+				<td class="enm_status"><div class="label">技量</div></td>
+		</tr>
+		<tr>
+			<td>
+				<div class="status">
+					<span id="you_vit_now">1</span>
+					/
+					<span id="you_vit_max">1</span>
+				</div>
+			</td>
+			<td>
+				<div class="status">
+					<span id="you_dex_now">1</span>
+					/
+					<span id="you_dex_max">1</span>
+				</div>
+			</td>
+			<td>
+					<div class="status">
+						<span id="you_lck_now">1</span>
+						/
+						<span id="you_lck_max">1</span>
+					</div>
+			</td>
+			<td class="enm_status">
+					<div class="status">
+						<span id="enm_vit_now">1</span>
+						/
+						<span id="enm_vit_max">1</span>
+					</div>
+				</td>
+				<td class="enm_status">
+					<div class="status">
+						<span id="enm_dex_now">1</span>
+						/
+						<span id="enm_dex_max">1</span>
+					</div>
+				</td>
+			</tr>
+	</table>
+	<!-- ステータス欄 終了 -->
+	
 	<!-- イメージ欄 開始 -->
 	<canvas id="canvas" width="200" height="200"></canvas>
 	<!-- イメージ欄 終了 -->
-    <p id="message">Hello World</p>
+    <p id="message"></p>
 	<ul id="select">
 	  <li><a href="#" onclick="load_scene('0_0')">≫次へ</a></li>
 	</ul>
