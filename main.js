@@ -43,7 +43,7 @@ ipc.on('load', (event, arg) => {
   try{
     const data = load(arg);
     logic.new_scene(arg, data);
-    event.returnValue = logic.scene;
+    event.returnValue = logic;
   }catch(err){
     console.log(err);
   }finally{

@@ -8,6 +8,7 @@
 module.exports = class Logic{
   constructor(){
     this.you = new Member("あなた", 12, 6, 9);
+    this.emeny = null;
     this.items = require('../items.js');
     this.scene = new Scene("", null);
   }
@@ -38,6 +39,16 @@ module.exports = class Logic{
 
   new_scene(name, data){
     this.scene = new Scene(name, data);
+  }
+
+  get_gamedata(){
+    let result = {};
+    result.scene = this.scene;
+    let status = {};
+    status.you = this.you;
+    status.enemy = this.enemy;
+    result.status = status;
+    return result;
   }
 }
 

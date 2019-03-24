@@ -45,6 +45,14 @@ function build_select_tag(key, value){
   return `<li><a href='#' onclick='load_scene("${value}")'>${key}</a></li>`;
 }
 
+function reflesh_status(id, data){
+  ["vit_now", "vit_max", "dex", "lck_now", "lck_max"].forEach(key => {
+    if(data[key]){
+      document.getElementById(`${id}_${key}`).innerText = data[key];
+    }
+  });
+}
+
 function reflesh_image(data){
   let canvas = document.getElementById("canvas").getContext("2d");
   canvas.strokeStyle = "black";
@@ -75,13 +83,13 @@ function reflesh_message(message){
 }
 
 function reflesh(data){
-  reflesh_message(data.message);
-  reflesh_select(data.select);
-  reflesh_image(data.image);
+  reflesh_message(data.scene.message);
+  reflesh_select(data.scene.select);
+  reflesh_image(data.scene.image);
+  reflesh_status("you", data.you);
 }
 
 function load_scene(scene_name) {
-  const msg = document.querySelector("#message");
   const data = ipc.sendSync('load', scene_name);
   if(data){
     reflesh(data);
