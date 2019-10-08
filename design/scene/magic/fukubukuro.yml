@@ -1,5 +1,5 @@
 image:
-  icon: fukubukuro
+  icon: fukubukuro.png
 message: |-
   消費体力：2
   真っ赤な福袋から火の玉が飛び出す
@@ -8,4 +8,10 @@ message: |-
   剣で対峙する前に先手を取ることができるのが利点だが
   こちらも体力を消費してしまうので
   剣で倒せる敵に使うのは効率が悪い
-prev: '1_1_2'
+select:
+  - 福袋: magic/fukubukuro
+  - 鍼: magic/hari
+  - 仙人の薬壺: magic/kusuritubo
+  - 火の粉の笛: magic/hinokonofue
+  - 紫のオルゴール: magic/purpleorgor
+prev: '1_1'

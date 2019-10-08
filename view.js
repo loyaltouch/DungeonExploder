@@ -53,6 +53,14 @@ function reflesh_status(id, data){
   });
 }
 
+function reflesh_icon(canvas, url){
+  let image = new Image();
+  image.src = url;
+  image.onload = function(){
+    canvas.drawImage(image, 0, 0, 180, 180);
+  }
+}
+
 function reflesh_image(data){
   let canvas = document.getElementById("canvas").getContext("2d");
   canvas.strokeStyle = "black";

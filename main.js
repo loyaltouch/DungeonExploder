@@ -30,6 +30,7 @@ app.on('ready', ()=> {
     width: 800,
     height: 600
   });
+  mainWindow.openDevTools();
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   //ウィンドウが閉じられたらアプリも終了
